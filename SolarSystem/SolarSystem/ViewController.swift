@@ -27,12 +27,20 @@ class ViewController: UIViewController, GADBannerViewDelegate {
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
         
+        let touchRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        self.sceneView.addGestureRecognizer(touchRecognizer)
+        
         // config banner
         request.testDevices = [kGADSimulatorID]
         bannerView.delegate = self
-        bannerView.adUnitID = "ca-app-pub-2235888736483441/8282276054"
+        bannerView.adUnitID = Consts.bannerAdUnitId
         bannerView.rootViewController = self
         bannerView.load(request)
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        guard let sceneView = sender.view as? ARSCNView else {return}
+        guard let pointOfView = sceneView.pointOfView else {return}
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -169,8 +177,6 @@ class ViewController: UIViewController, GADBannerViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
 extension Int {
