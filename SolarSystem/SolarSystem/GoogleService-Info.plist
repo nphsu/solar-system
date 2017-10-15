@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>217077697080-97fpjfhdclam862l43vpg2ohpv83n3so.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.217077697080-97fpjfhdclam862l43vpg2ohpv83n3so</string>
+	<key>API_KEY</key>
+	<string>AIzaSyASPuf-YLOJNGUpQ9Y3Y5mLhXvpCjcNq7Y</string>
+	<key>GCM_SENDER_ID</key>
+	<string>217077697080</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.shunp.SolarSystem</string>
+	<key>PROJECT_ID</key>
+	<string>solarsystem-67f60</string>
+	<key>STORAGE_BUCKET</key>
+	<string>solarsystem-67f60.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:217077697080:ios:da80b660eafbd417</string>
+	<key>DATABASE_URL</key>
+	<string>https://solarsystem-67f60.firebaseio.com</string>
+</dict>
+</plist>
