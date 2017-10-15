@@ -17,17 +17,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tem-Sk-SQU" customClass="GADBannerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tem-Sk-SQU" customClass="GADBannerView">
                                 <rect key="frame" x="0.0" y="637" width="375" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ddR-1u-WvL">
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddR-1u-WvL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="638"/>
-                                <autoresizingMask key="autoresizingMask"/>
                             </arscnView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ddR-1u-WvL" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Fap-E1-gcu"/>
+                            <constraint firstItem="Tem-Sk-SQU" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="GTg-sy-SmL"/>
+                            <constraint firstItem="Tem-Sk-SQU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="617" id="Hcb-MW-e53"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ddR-1u-WvL" secondAttribute="bottom" constant="29" id="IgG-Q9-vxy"/>
+                            <constraint firstItem="Tem-Sk-SQU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NGX-VI-Pwk"/>
+                            <constraint firstItem="ddR-1u-WvL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="itL-X2-bSS"/>
+                            <constraint firstItem="ddR-1u-WvL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vxH-9z-Lrk"/>
+                            <constraint firstItem="Tem-Sk-SQU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wGE-LO-ETS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
