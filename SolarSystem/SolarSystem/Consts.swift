@@ -12,6 +12,8 @@ struct Consts {
     
     static let bannerAdUnitId = "ca-app-pub-2235888736483441/8282276054"
     
+    static let interstitialAdUnitId = "ca-app-pub-2235888736483441/6272903818"
+    
     static let solarSystemRenderingOrder = 200
     
     static let portalRenderingOrder = 100

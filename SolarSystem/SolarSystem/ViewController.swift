@@ -15,6 +15,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, GADBannerViewDelegate
 
     @IBOutlet weak var bannerView: GADBannerView!
     let request = GADRequest()
+    var interstitial: GADInterstitial!
     
     @IBOutlet weak var sceneView: ARSCNView!
     
@@ -31,6 +32,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, GADBannerViewDelegate
         bannerView.adUnitID = Consts.bannerAdUnitId
         bannerView.rootViewController = self
         bannerView.load(request)
+        
+        // config interstitial
+        interstitial = GADInterstitial(adUnitID: Consts.interstitialAdUnitId)
+        interstitial.load(request)
     }
     
     @IBAction func clearPortal(_ sender: Any) {
@@ -39,6 +44,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, GADBannerViewDelegate
             node.removeFromParentNode()
         }
         showPortal = false
+        
+        interstitial.present(fromRootViewController: self)
+        request.testDevices = [kGADSimulatorID]
+        interstitial = GADInterstitial(adUnitID: Consts.interstitialAdUnitId)
+        interstitial.load(request)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,42 +66,38 @@ class ViewController: UIViewController, ARSCNViewDelegate, GADBannerViewDelegate
         if (showPortal) {
             return
         }
-        if let touch = touches.first {
-            let touchLocation = touch.location(in: sceneView)
-            let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
-            if let hitResult = results.first {
-                let portalScene = SCNScene(named: "art.scnassets/portal.scn")!
-                if let portalNode = portalScene.rootNode.childNode(withName: "portal", recursively: true) {
-                    
-                    let x = hitResult.worldTransform.columns.3.x
-                    let y = hitResult.worldTransform.columns.3.y + 1
-                    let z = hitResult.worldTransform.columns.3.z - 6
-                    
-                    for node in self.sceneView.scene.rootNode.childNodes {
-                        node.removeFromParentNode()
-                    }
-                    
-                    let fireNode = Fire().createFire(x: x, y: y - 3, z: z + 2)
-                    self.sceneView.scene.rootNode.addChildNode(fireNode)
-             
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        
-                        portalNode.position = SCNVector3(x: x, y: y, z: z)
-                        portalNode.renderingOrder = 100
-                        portalNode.opacity = 0
-                        let fadeIn = SCNAction.fadeIn(duration: 5)
-                        portalNode.runAction(fadeIn)
-                        self.sceneView.scene.rootNode.addChildNode(portalNode)
-                        
-                        let solarSystem = SolarSystem(x: x, y: y, z: z)
-                        for node in solarSystem.getNodeList() {
-                            self.sceneView.scene.rootNode.addChildNode(node)
-                        }
-                        self.showPortal = true
-                    }
-                }
-            }
+        guard let touch = touches.first else { return }
+        let touchLocation = touch.location(in: sceneView)
+        let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
+        
+        guard let hitResult = results.first else { return }
+        let portalScene = SCNScene(named: "art.scnassets/portal.scn")!
+        
+        guard let portalNode = portalScene.rootNode.childNode(withName: "portal", recursively: true) else { return }
+        
+        let x = hitResult.worldTransform.columns.3.x
+        let y = hitResult.worldTransform.columns.3.y + 1
+        let z = hitResult.worldTransform.columns.3.z - 6
+        
+        for node in self.sceneView.scene.rootNode.childNodes {
+            node.removeFromParentNode()
         }
+        
+        let fireNode = Fire().createFire(x: x, y: y - 3, z: z + 2)
+        self.sceneView.scene.rootNode.addChildNode(fireNode)
+ 
+        portalNode.position = SCNVector3(x: x, y: y, z: z)
+        portalNode.renderingOrder = 100
+        portalNode.opacity = 0
+        let fadeIn = SCNAction.fadeIn(duration: 5)
+        portalNode.runAction(fadeIn)
+        self.sceneView.scene.rootNode.addChildNode(portalNode)
+        
+        let solarSystem = SolarSystem(x: x, y: y, z: z)
+        for node in solarSystem.getNodeList() {
+            self.sceneView.scene.rootNode.addChildNode(node)
+        }
+        self.showPortal = true
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
