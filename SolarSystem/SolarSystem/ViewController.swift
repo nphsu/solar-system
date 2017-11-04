@@ -18,6 +18,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, GADBannerViewDelegate
     var interstitial: GADInterstitial!
     
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var supportText: UILabel!
     
     var showPortal = false
     
@@ -79,6 +80,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, GADBannerViewDelegate
         let y = hitResult.worldTransform.columns.3.y + 1
         let z = hitResult.worldTransform.columns.3.z - 6
         
+        self.supportText.alpha = 0
         for node in self.sceneView.scene.rootNode.childNodes {
             node.removeFromParentNode()
         }
@@ -113,6 +115,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, GADBannerViewDelegate
         plane.materials = [GridMaterial().create()]
         planeNode.geometry = plane
         node.addChildNode(planeNode)
+        DispatchQueue.main.async(execute: {
+            UIApplication.shared.registerForRemoteNotifications()
+            self.supportText.text = "1度だけ水平面をタップしてください"
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
